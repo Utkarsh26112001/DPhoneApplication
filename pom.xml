@@ -18,7 +18,8 @@
         <module>Customer</module>
 		<module>User</module>
 		<module>Referral</module>
-	</modules>
+        <module>Products_Details</module>
+    </modules>
     <properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.1</spring-cloud.version>
