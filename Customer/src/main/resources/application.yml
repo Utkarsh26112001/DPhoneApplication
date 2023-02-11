@@ -1,6 +1,20 @@
 spring:
   application:
     name: CustomerApplication
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dphone_products
+    username: postgres
+    password: Finserv@2023
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
   port: 8081
+  error:
+    include-message: always
