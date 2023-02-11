@@ -12,10 +12,10 @@ import java.util.Date;
 @ToString
 public class ReferralBean {
     private long referralId;
-    private String firstName;
-    private String lastName;
-    private String mobileNumber;
-    private String email;
+    private String referralFirstName;
+    private String referralLastName;
+    private String referralMobileNumber;
+    private String referralEmail;
     private long userId;
     private Date dateOfReferral;
     private int points;
