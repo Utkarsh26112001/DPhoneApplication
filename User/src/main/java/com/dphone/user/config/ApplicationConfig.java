@@ -1,4 +1,4 @@
-package com.dphone.user.cong;
+package com.dphone.user.config;
 
 
 import com.dphone.user.dao.UserDao;
