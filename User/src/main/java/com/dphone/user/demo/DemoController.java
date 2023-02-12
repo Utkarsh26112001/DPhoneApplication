@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/auth/demo-controller")
 public class DemoController {
 
-
     @GetMapping
     public ResponseEntity<String> sayHello(){
         return ResponseEntity.ok("Hello from sercured end");
