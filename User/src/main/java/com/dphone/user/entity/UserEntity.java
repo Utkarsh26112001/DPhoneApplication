@@ -18,8 +18,7 @@ public class UserEntity implements UserDetails {
 
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "user_name")
     private String userName;
     private String userFirstName;
     private String userLastName;

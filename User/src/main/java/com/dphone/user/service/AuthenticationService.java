@@ -54,7 +54,7 @@ public class AuthenticationService {
                 )
         );
 
-         var user  = userDao.findUserByUserName(request.getUsername())
+         var user  = userDao.findByUserName(request.getUsername())
                  .orElseThrow() ;
 
 
