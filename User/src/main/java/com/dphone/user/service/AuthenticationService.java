@@ -35,6 +35,7 @@ public class AuthenticationService {
                 .userMobile(request.getUserMobile())
                 .userEmail(request.getUserEmail())
                 .userPassword(passwordEncoder.encode(request.getUserPassword()))
+                .userAddress(request.getUserAddress())
                 .role(Role.USER)
                 .build();
         userDao.save(user);
