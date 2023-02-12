@@ -20,6 +20,4 @@ public class RegisterRequest {
     private String userPassword;
     private String userAddress;
 
-
-
 }

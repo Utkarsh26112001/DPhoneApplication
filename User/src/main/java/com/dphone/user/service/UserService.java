@@ -22,7 +22,6 @@ public class UserService {
 
     public String extractUsername(String token) {
 
-
         return extractClaim(token, Claims::getSubject);
     }
 
