@@ -21,7 +21,7 @@ public class ReferralEntity {
     @Column(length = 10)
     private String mobileNumber;
     @Column(unique = true)
-    private String referralEmail;
+    private String email;
     @Column(unique = true)
     private Long userId;
     private Date dateOfReferral;

@@ -11,7 +11,7 @@ public interface ReferralService {
     ReferralBean deleteReferral(Long referralId);
     ReferralEntity searchReferralById(Long referralId);
     ReferralBean updateReferral(ReferralBean referralBean);
-    ReferralEntity searchReferralByEmail(String referralEmail);
+    ReferralEntity searchReferralByEmail(String email);
     ReferralEntity searchReferralByMobile(String referralMobileNumber);
     ReferralEntity searchReferralByFirstName(String referralFirstName);
 }

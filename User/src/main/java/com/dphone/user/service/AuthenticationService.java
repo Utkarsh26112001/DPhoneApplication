@@ -1,5 +1,6 @@
 package com.dphone.user.service;
 
+import com.dphone.user.bean.UserBean;
 import com.dphone.user.controller.AuthenticationRequest;
 import com.dphone.user.controller.AuthenticationResponse;
 import com.dphone.user.controller.RegisterRequest;
@@ -9,8 +10,6 @@ import com.dphone.user.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class AuthenticationService {
 
     private  final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    public AuthenticationResponse register(UserBean request) {
 
         var user = UserEntity.builder()
                 .userFirstName(request.getUserFirstName())

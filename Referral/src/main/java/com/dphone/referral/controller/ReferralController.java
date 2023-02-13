@@ -3,7 +3,6 @@ package com.dphone.referral.controller;
 
 import com.dphone.referral.bean.ReferralBean;
 import com.dphone.referral.entity.ReferralEntity;
-import com.dphone.referral.service.ReferralService;
 import com.dphone.referral.service.ReferralServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
-@RequestMapping("/referral/v1")
+@RequestMapping("/api/v1/referral/")
 public class ReferralController {
 
     @Autowired
@@ -25,11 +26,10 @@ public class ReferralController {
     }
 
     @GetMapping("/getAllReferral")
-    public ResponseEntity<ReferralBean> diaplayAll(){
-        ReferralBean referralBean = (ReferralBean) referralService.getAllReferral();
-        return new ResponseEntity<>(referralBean, new HttpHeaders(), HttpStatus.OK);
-    }
+    public List<ReferralEntity> diaplayAll(){
+        return referralService.getAllReferral();
 
+    }
     @GetMapping("/getById")
     public ResponseEntity<ReferralEntity> searchById(@PathVariable("referralId") Long referralId){
         ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralById(referralId);
@@ -37,8 +37,8 @@ public class ReferralController {
     }
 
     @GetMapping("/getByEmail")
-    public ResponseEntity<ReferralEntity> searchByEmail(@PathVariable("referralEmail") String referralEmail){
-        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByEmail(referralEmail);
+    public ResponseEntity<ReferralEntity> searchByEmail(@PathVariable("email") String email){
+        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByEmail(email);
         return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
     }
 
@@ -59,7 +59,6 @@ public class ReferralController {
         ReferralBean referralBean = referralService.deleteReferral(referralId);
         return new ResponseEntity<>(referralBean, new HttpHeaders(), HttpStatus.OK);
     }
-
     @PutMapping("/updateReferral")
     public ResponseEntity<ReferralBean> updateReferral(@RequestBody ReferralBean referralBean){
         ReferralBean referralBean1 = referralService.updateReferral(referralBean);
