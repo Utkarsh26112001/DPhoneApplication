@@ -15,7 +15,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/referral/")
+@RequestMapping("/api/v1/referral")
 public class ReferralController {
 
     @Autowired
@@ -30,21 +30,22 @@ public class ReferralController {
         return referralService.getAllReferral();
 
     }
-    @GetMapping("/getById")
-    public ResponseEntity<ReferralEntity> searchById(@PathVariable("referralId") Long referralId){
-        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralById(referralId);
+
+    @GetMapping("/referrals/{id}")
+    public ResponseEntity<ReferralEntity> searchById(@PathVariable("id")  Long id){
+        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralById(id);
         return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping("/getByEmail")
+    @GetMapping("/email/{email}")
     public ResponseEntity<ReferralEntity> searchByEmail(@PathVariable("email") String email){
         ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByEmail(email);
         return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping("/getByFirstName")
-    public ResponseEntity<ReferralEntity> searchByFname(@PathVariable("referralFname") String referralFname){
-        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByFirstName(referralFname);
+    @GetMapping("/name/{n}")
+    public ResponseEntity<ReferralEntity> searchByFname(@PathVariable("n") String firstname){
+        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByFirstName(firstname);
         return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
     }
 

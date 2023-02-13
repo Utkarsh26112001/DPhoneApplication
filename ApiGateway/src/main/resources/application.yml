@@ -16,10 +16,10 @@ spring:
       - id: users
         uri: lb://UserApplication
         predicates:
-          - Path=/api/v1/auth/user/*
+          - Path=/api/v1/auth/user/**
       - id: referral
         uri: lb://ReferralApplication
         predicates:
-          - Path=/api/v1/referral/*
+          - Path=/api/v1/referral/**
   main:
     web-application-type: reactive
