@@ -6,9 +6,12 @@ import com.dphone.referral.dao.ReferralDao;
 import com.dphone.referral.entity.ReferralEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -16,7 +19,6 @@ public class ReferralServiceImpl implements ReferralService{
     @Autowired
     private final ReferralDao referralDao;
     private final BeanToEntityConvert beanToEntityConvert;
-
     @Override
     public List<ReferralEntity> getAllReferral() {
         return referralDao.findAll();
@@ -31,7 +33,7 @@ public class ReferralServiceImpl implements ReferralService{
             referralDao.save(entity);
         }
         else {
-            System.out.println("Record already present");
+            throw new IllegalStateException("referral with Id "+entity.getReferralId()+" already exists");
         }
 
         ReferralBean newReferralBean = beanToEntityConvert.convertToBean(entity);
@@ -50,27 +52,56 @@ public class ReferralServiceImpl implements ReferralService{
     }
 
     @Override
-    public ReferralBean searchReferralById(Long referralId) {
-        return null;
+    public ReferralEntity searchReferralById(Long referralId) {
+        Optional<ReferralEntity> referralEntity = referralDao.findById(referralId);
+        if(referralEntity.isPresent()){
+            return referralEntity.get();
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record Not Found");
+        }
     }
 
     @Override
     public ReferralBean updateReferral(ReferralBean referralBean) {
-        return null;
+        ReferralEntity entity = beanToEntityConvert.convertToEntity(referralBean);
+        boolean exists = referralDao.existsById(entity.getReferralId());
+        if(exists){
+            referralDao.save(entity);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record with this Id not present");
+        }
+        ReferralBean newReferralBean = beanToEntityConvert.convertToBean(entity);
+        return newReferralBean;
     }
 
     @Override
-    public ReferralBean searchReferralByEmail(String referralEmail) {
-        return null;
+    public ReferralEntity searchReferralByEmail(String referralEmail) {
+        Optional<ReferralEntity> referralEntity = Optional.ofNullable(referralDao.findByEmail(referralEmail));
+        if(referralEntity.isPresent()){
+            return referralEntity.get();
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record Not Found");
+        }
     }
 
     @Override
-    public ReferralBean searchReferralByMobile(String referralMobileNumber) {
-        return null;
+    public ReferralEntity searchReferralByMobile(String referralMobileNumber) {
+        Optional<ReferralEntity> referralEntity = Optional.ofNullable(referralDao.findByMobile(referralMobileNumber));
+        if(referralEntity.isPresent()){
+            return referralEntity.get();
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record Not Found");
+        }
     }
 
     @Override
-    public ReferralBean searchReferralByFirstName(String referralFirstName) {
-        return null;
+    public ReferralEntity searchReferralByFirstName(String referralFirstName) {
+        Optional<ReferralEntity> referralEntity = Optional.ofNullable(referralDao.findByFirstName(referralFirstName));
+        if(referralEntity.isPresent()){
+            return referralEntity.get();
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record Not Found");
+        }
     }
 }

@@ -9,9 +9,9 @@ public interface ReferralService {
     List<ReferralEntity> getAllReferral();
     ReferralBean saveReferral(ReferralBean referralBean);
     ReferralBean deleteReferral(Long referralId);
-    ReferralBean searchReferralById(Long referralId);
+    ReferralEntity searchReferralById(Long referralId);
     ReferralBean updateReferral(ReferralBean referralBean);
-    ReferralBean searchReferralByEmail(String referralEmail);
-    ReferralBean searchReferralByMobile(String referralMobileNumber);
-    ReferralBean searchReferralByFirstName(String referralFirstName);
+    ReferralEntity searchReferralByEmail(String referralEmail);
+    ReferralEntity searchReferralByMobile(String referralMobileNumber);
+    ReferralEntity searchReferralByFirstName(String referralFirstName);
 }
