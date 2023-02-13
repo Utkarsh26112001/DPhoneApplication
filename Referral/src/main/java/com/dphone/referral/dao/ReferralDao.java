@@ -4,5 +4,8 @@ import com.dphone.referral.entity.ReferralEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReferralDao extends JpaRepository<ReferralEntity,Long>{
+    public ReferralEntity findByEmail(String referralEmail);
+    public ReferralEntity findByMobile(String mobileNumber);
+    public ReferralEntity findByFirstName(String referralFirstName);
 
 }
