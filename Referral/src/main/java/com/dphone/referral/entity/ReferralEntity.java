@@ -20,6 +20,7 @@ public class ReferralEntity {
     private String referralLastName;
     @Column(length = 10)
     private String mobileNumber;
+    @Column(unique = true)
     private String referralEmail;
     @Column(unique = true)
     private Long userId;
