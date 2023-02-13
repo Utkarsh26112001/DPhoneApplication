@@ -15,18 +15,5 @@ public class ReferralDaoImpl{
 
     @Autowired
     ReferralDao referralDao;
-//    private final BeanToEntityConvert beanToEntityConvert;
-
-//    public void saveReferral(ReferralBean referralBean){
-//
-//        ReferralEntity referralEntity = beanToEntityConvert.convertToEntity(referralBean);
-//
-//        referralDao.save(referralEntity);
-//
-//        ReferralBean newReferralBean = new ReferralBean();
-//
-//        BeanUtils.copyProperties(referralEntity,newReferralBean);
-//
-//    }
 
 }
