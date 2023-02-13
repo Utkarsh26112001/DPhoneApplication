@@ -1,5 +1,6 @@
 package com.dphone.user.controller;
 
+import com.dphone.user.bean.UserBean;
 import com.dphone.user.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class UserController {
 	@PostMapping("/register")
 
 
-	public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
+	public ResponseEntity<AuthenticationResponse> register(@RequestBody UserBean request){
 
       return ResponseEntity.ok(service.register(request));
 	}
