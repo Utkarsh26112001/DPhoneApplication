@@ -1,4 +1,4 @@
-sserver:
+server:
   port: 9191
 eureka:
   client:
@@ -17,4 +17,5 @@ spring:
         uri: lb://UserApplication
         predicates:
           - Path=/api/v1/auth/user/**
-
+  main:
+    web-application-type: reactive
