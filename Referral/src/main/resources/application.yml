@@ -5,6 +5,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/dphone_referral
     username: postgres
     password: Finserv@2023
+  main:
+    allow-circular-references: true
   jpa:
     hibernate:
       ddl-auto: update

@@ -16,5 +16,4 @@ public class ReferralDaoImpl{
     @Autowired
     ReferralDao referralDao;
 
-
 }
