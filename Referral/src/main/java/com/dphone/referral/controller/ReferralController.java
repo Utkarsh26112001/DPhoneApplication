@@ -49,6 +49,12 @@ public class ReferralController {
         return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @GetMapping("/phone/{mobile}")
+    public ResponseEntity<ReferralEntity> searchByMobile(@PathVariable("mobile") String mobile){
+        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByMobile(mobile);
+        return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
+    }
+
     @PostMapping("/saveReferral")
     public ResponseEntity<ReferralBean> addReferral(@RequestBody ReferralBean referralBean){
         ReferralBean referralBean1 = referralService.saveReferral(referralBean);

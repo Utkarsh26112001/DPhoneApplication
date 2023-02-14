@@ -87,8 +87,8 @@ public class ReferralServiceImpl implements ReferralService{
     }
 
     @Override
-    public ReferralEntity searchReferralByMobile(String referralMobileNumber) {
-        Optional<ReferralEntity> referralEntity = Optional.ofNullable(referralDao.findByMobileNumber(referralMobileNumber));
+    public ReferralEntity searchReferralByMobile(String mobileNumber) {
+        Optional<ReferralEntity> referralEntity = Optional.ofNullable(referralDao.findByMobileNumber(mobileNumber));
         if(referralEntity.isPresent()){
             return referralEntity.get();
         }else{
