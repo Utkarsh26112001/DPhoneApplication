@@ -29,12 +29,12 @@ public class ReferralServiceImpl implements ReferralService{
     public ReferralBean saveReferral(ReferralBean referralBean) {
         ReferralEntity entity =  convertToEntity(referralBean);
         // from object to object copying
-        boolean exists = referralDao.existsById(entity.getReferralId());
+        boolean exists = referralDao.existsById(entity.getReferralUserName());
         if(!exists){
             referralDao.save(entity);
         }
         else {
-            throw new IllegalStateException("referral with Id "+entity.getReferralId()+" already exists");
+            throw new IllegalStateException("referral with Id "+entity.getReferralUserName()+" already exists");
         }
 
         ReferralBean newReferralBean = convertToBean(entity);
@@ -42,20 +42,20 @@ public class ReferralServiceImpl implements ReferralService{
     }
 //
     @Override
-    public ReferralBean deleteReferral(Long referralId) {
-        boolean exists = referralDao.existsById(referralId);
+    public ReferralBean deleteReferral(String referralUserName) {
+        boolean exists = referralDao.existsById(referralUserName);
         if(!exists){
-            throw new IllegalStateException("employee with Id "+referralId+" does not exists");
+            throw new IllegalStateException("employee with Id "+referralUserName+" does not exists");
         }
-        referralDao.deleteById(referralId);
+        referralDao.deleteById(referralUserName);
         System.out.println("Deleted Successfully");
         return null;
     }
 //
 
     @Override
-    public ReferralEntity searchReferralById(Long referralId) {
-        Optional<ReferralEntity> referralEntity = referralDao.findById(referralId);
+    public ReferralEntity searchReferralById(String referralUserName) {
+        Optional<ReferralEntity> referralEntity = referralDao.findById(referralUserName);
         if(referralEntity.isPresent()){
             return referralEntity.get();
         }else{
@@ -65,7 +65,7 @@ public class ReferralServiceImpl implements ReferralService{
 
     public ReferralBean updateReferral(ReferralBean referralBean) {
         ReferralEntity entity = convertToEntity(referralBean);
-        boolean exists = referralDao.existsById(entity.getReferralId());
+        boolean exists = referralDao.existsById(entity.getReferralUserName());
         if(exists){
             referralDao.save(entity);
         }
@@ -87,8 +87,8 @@ public class ReferralServiceImpl implements ReferralService{
     }
 
     @Override
-    public ReferralEntity searchReferralByMobile(String referralMobileNumber) {
-        Optional<ReferralEntity> referralEntity = Optional.ofNullable(referralDao.findByMobileNumber(referralMobileNumber));
+    public ReferralEntity searchReferralByMobile(String mobileNumber) {
+        Optional<ReferralEntity> referralEntity = Optional.ofNullable(referralDao.findByMobileNumber(mobileNumber));
         if(referralEntity.isPresent()){
             return referralEntity.get();
         }else{

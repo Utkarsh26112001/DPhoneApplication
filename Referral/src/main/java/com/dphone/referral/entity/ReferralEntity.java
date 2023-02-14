@@ -14,8 +14,7 @@ import java.util.Date;
 @Table(name="Referral")
 public class ReferralEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long referralId;
+    private String referralUserName;
     private String referralFirstName;
     private String referralLastName;
     @Column(length = 10)

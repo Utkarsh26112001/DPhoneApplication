@@ -31,9 +31,9 @@ public class ReferralController {
 
     }
 
-    @GetMapping("/referrals/{id}")
-    public ResponseEntity<ReferralEntity> searchById(@PathVariable("id")  Long id){
-        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralById(id);
+    @GetMapping("/referrals/{username}")
+    public ResponseEntity<ReferralEntity> searchById(@PathVariable("username")  String username){
+        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralById(username);
         return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
     }
 
@@ -43,9 +43,15 @@ public class ReferralController {
         return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping("/name/{n}")
-    public ResponseEntity<ReferralEntity> searchByFname(@PathVariable("n") String firstname){
+    @GetMapping("/name/{name}")
+    public ResponseEntity<ReferralEntity> searchByFname(@PathVariable("name") String firstname){
         ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByFirstName(firstname);
+        return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @GetMapping("/phone/{mobile}")
+    public ResponseEntity<ReferralEntity> searchByMobile(@PathVariable("mobile") String mobile){
+        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByMobile(mobile);
         return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
     }
 
@@ -55,9 +61,9 @@ public class ReferralController {
         return new ResponseEntity<>(referralBean1, new HttpHeaders(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteReferral")
-    public ResponseEntity<ReferralBean> deleteReferral(@PathVariable("referralId") Long referralId){
-        ReferralBean referralBean = referralService.deleteReferral(referralId);
+    @DeleteMapping("/deleteReferral/{username}")
+    public ResponseEntity<ReferralBean> deleteReferral(@PathVariable("username") String username){
+        ReferralBean referralBean = referralService.deleteReferral(username);
         return new ResponseEntity<>(referralBean, new HttpHeaders(), HttpStatus.OK);
     }
     @PutMapping("/updateReferral")
