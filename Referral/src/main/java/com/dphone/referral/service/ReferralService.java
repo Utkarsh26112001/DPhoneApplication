@@ -8,8 +8,8 @@ import java.util.List;
 public interface ReferralService {
     List<ReferralEntity> getAllReferral();
     ReferralBean saveReferral(ReferralBean referralBean);
-    ReferralBean deleteReferral(Long referralId);
-    ReferralEntity searchReferralById(Long referralId);
+    ReferralBean deleteReferral(String referralUserName);
+    ReferralEntity searchReferralById(String referralUserName);
     ReferralBean updateReferral(ReferralBean referralBean);
     ReferralEntity searchReferralByEmail(String email);
     ReferralEntity searchReferralByMobile(String referralMobileNumber);

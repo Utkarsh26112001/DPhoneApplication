@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReferralDao extends JpaRepository<ReferralEntity, Long> {
+public interface ReferralDao extends JpaRepository<ReferralEntity, String > {
     public ReferralEntity findByEmail(String email);
 
     public ReferralEntity findByMobileNumber(String mobileNumber);

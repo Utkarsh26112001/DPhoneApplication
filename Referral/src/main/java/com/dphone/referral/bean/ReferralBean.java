@@ -12,7 +12,7 @@ import java.util.Date;
 @ToString
 @Component
 public class ReferralBean {
-    private long referralId;
+    private String referralUserName;
     private String referralFirstName;
     private String referralLastName;
     private String mobileNumber;
