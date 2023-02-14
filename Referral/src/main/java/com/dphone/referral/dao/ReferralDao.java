@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface ReferralDao extends JpaRepository<ReferralEntity, Long> {
     public ReferralEntity findByEmail(String email);
 
-
     public ReferralEntity findByMobileNumber(String mobileNumber);
 
     public ReferralEntity findByReferralFirstName(String referralFirstName);
