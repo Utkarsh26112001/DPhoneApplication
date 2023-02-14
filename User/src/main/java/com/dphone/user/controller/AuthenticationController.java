@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/auth/user")
-public class UserController {
+@RequestMapping("/api/v1/auth/user/")
+public class AuthenticationController {
 
 	private final AuthenticationService service;
 

@@ -1,6 +1,6 @@
 package com.dphone.user.config;
 
-import com.dphone.user.service.UserService;
+import com.dphone.user.service.JWTService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ import java.io.IOException;
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
 
-    private final  UserService userService;
+    private final JWTService JWTService;
     private final UserDetailsService userDetailsService;
     @Override
 
@@ -33,21 +33,26 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String authHeader = request.getHeader("Authorization");
-        final String jwt;
-        final String userName;
+         String jwt = null;
+         String userName = null;
 
-        if(authHeader==null || authHeader.startsWith("Bearer ")){
-            filterChain.doFilter(request,response);
-            return;
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            jwt = authHeader.substring(7);
+            try {
+                userName =  JWTService.extractUsername(jwt);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Unable to get JWT Token");
+            } catch (Exception e) {
+                System.out.println("JWT Token has expired");
+            }
+        } else {
+            logger.warn("JWT Token does not begin with Bearer String");
         }
 
-        jwt = authHeader.substring(7);
-
-        userName =  userService.extractUsername(jwt);
 
         if(userName != null && SecurityContextHolder.getContext().getAuthentication()==null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userName);
-            if(userService.isTokenValid(jwt,userDetails)){
+            if(JWTService.isTokenValid(jwt,userDetails)){
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,

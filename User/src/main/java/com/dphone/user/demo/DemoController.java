@@ -11,11 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 
-@RequestMapping("/api/v1/auth/demo-controller")
+@RequestMapping("/api/v1/auth/user/demo-controller")
 public class DemoController {
 
+
+
     @GetMapping
+
+
     public ResponseEntity<String> sayHello(){
-        return ResponseEntity.ok("Hello from sercured end");
+        return ResponseEntity.ok("Hello from secured end");
     }
 }
+
+
+
