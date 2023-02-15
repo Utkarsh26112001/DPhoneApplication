@@ -22,7 +22,7 @@ public class ReferralEntity {
     @Column(unique = true)
     private String email;
     @Column(unique = true)
-    private Long userId;
+    private String username;
     private Date dateOfReferral;
     private int points;
     private boolean status=false;

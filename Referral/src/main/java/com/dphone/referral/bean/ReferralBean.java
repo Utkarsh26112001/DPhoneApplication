@@ -17,7 +17,7 @@ public class ReferralBean {
     private String referralLastName;
     private String mobileNumber;
     private String email;
-    private long userId;
+    private String username;
     private Date dateOfReferral;
     private int points;
     private boolean status;
