@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,5 +15,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductBean {
     private String productName;
+    private Long productId;
+    private Long price;
+    private String referralCode;
+    private Integer quantity;
+    private Date buyingDate;
 
 }
