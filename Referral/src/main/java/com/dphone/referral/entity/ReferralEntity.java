@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name="Referral")
 public class ReferralEntity {
     @Id
-    private String referralUserName;
+    private String username;
     private String referralFirstName;
     private String referralLastName;
     @Column(length = 10)
@@ -22,7 +22,7 @@ public class ReferralEntity {
     @Column(unique = true)
     private String email;
     @Column(unique = true)
-    private String username;
+    private Long referralCode;
     private Date dateOfReferral;
     private int points;
     private boolean status=false;

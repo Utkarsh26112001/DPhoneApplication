@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @AllArgsConstructor
@@ -29,14 +30,14 @@ public class ReferralServiceImpl implements ReferralService{
     public ReferralBean saveReferral(ReferralBean referralBean) {
         ReferralEntity entity =  convertToEntity(referralBean);
         // from object to object copying
-        boolean exists = referralDao.existsById(entity.getReferralUserName());
+        boolean exists = referralDao.existsById(entity.getUsername());
         if(!exists){
+            entity.setReferralCode(generateReferralCode());
             referralDao.save(entity);
         }
         else {
-            throw new IllegalStateException("referral with Id "+entity.getReferralUserName()+" already exists");
+            throw new IllegalStateException("referral with Id "+entity.getUsername()+" already exists");
         }
-
         ReferralBean newReferralBean = convertToBean(entity);
         return newReferralBean;
     }
@@ -65,7 +66,7 @@ public class ReferralServiceImpl implements ReferralService{
 
     public ReferralBean updateReferral(ReferralBean referralBean) {
         ReferralEntity entity = convertToEntity(referralBean);
-        boolean exists = referralDao.existsById(entity.getReferralUserName());
+        boolean exists = referralDao.existsById(entity.getUsername());
         if(exists){
             referralDao.save(entity);
         }
@@ -107,7 +108,15 @@ public class ReferralServiceImpl implements ReferralService{
         }
  }
 
-public ReferralEntity convertToEntity(ReferralBean referralBean){
+    @Override
+    public Long generateReferralCode() {
+        Random rand = new Random();
+        // Generate random integers in range 0 to 999
+        int rand_int1 = rand.nextInt(1000);
+        return (long) rand_int1;
+    }
+
+    public ReferralEntity convertToEntity(ReferralBean referralBean){
     ReferralEntity referralEntity = new ReferralEntity();
     BeanUtils.copyProperties(referralBean,referralEntity);
     return referralEntity;

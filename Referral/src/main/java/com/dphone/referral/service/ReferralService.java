@@ -14,4 +14,6 @@ public interface ReferralService {
     ReferralEntity searchReferralByEmail(String email);
     ReferralEntity searchReferralByMobile(String referralMobileNumber);
     ReferralEntity searchReferralByFirstName(String referralFirstName);
+
+    Long generateReferralCode();
 }
