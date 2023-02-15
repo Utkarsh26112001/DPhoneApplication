@@ -21,5 +21,9 @@ spring:
         uri: lb://ReferralApplication
         predicates:
           - Path=/api/v1/referral/**
+      - id: mailer
+        uri: lb://mailservice
+        predicates:
+          - Path=/dphonemailservice/**
   main:
     web-application-type: reactive
