@@ -1,6 +1,5 @@
 package com.dphone.referral.service;
 
-import com.dphone.referral.bean.BeanToEntityConvert;
 import com.dphone.referral.bean.ReferralBean;
 import com.dphone.referral.dao.ReferralDao;
 import com.dphone.referral.entity.ReferralEntity;
@@ -20,7 +19,6 @@ import java.util.Random;
 public class ReferralServiceImpl implements ReferralService{
     @Autowired
     private final ReferralDao referralDao;
-
 
     @Override
     public List<ReferralEntity> getAllReferral() {
@@ -52,7 +50,6 @@ public class ReferralServiceImpl implements ReferralService{
         System.out.println("Deleted Successfully");
         return null;
     }
-//
 
     @Override
     public ReferralEntity searchReferralById(String referralUserName) {
