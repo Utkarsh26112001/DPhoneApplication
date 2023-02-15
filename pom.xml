@@ -20,6 +20,7 @@
 		<module>Referral</module>
         <module>Products_Details</module>
         <module>ApiGateway</module>
+        <module>MailService</module>
     </modules>
     <properties>
 		<java.version>17</java.version>
