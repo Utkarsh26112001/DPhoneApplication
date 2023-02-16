@@ -34,50 +34,83 @@ public class ReferralServiceImpl implements ReferralService{
          }
           return beanList;
     }
+
+   // complete
     @Override
     public ReferralBean saveReferral(ReferralBean referralBean) {
         ReferralEntity entity =  convertToEntity(referralBean);
         // from object to object copying
-        boolean exists = referralDao.existsById(entity.getUsername());
-        if(!exists){
-            entity.setReferralCode(generateReferralCode());
+//        boolean exists = referralDao.existsById(entity.getUsername());
+
+        if(!referralDao.existsByEmail(entity.getEmail())){
+            entity.setReferralCode("dPhone"+generateReferralCode());
             referralDao.save(entity);
         }
         else {
             throw new IllegalStateException("referral with Id "+entity.getUsername()+" already exists");
         }
-        ReferralBean newReferralBean = convertToBean(entity);
-        return newReferralBean;
+      return  convertToBean(entity);
+
     }
-//
+
+    // not working
+    //No EntityManager with actual transaction available for current thread - cannot reliably process 'remove' call
     @Override
-    public ReferralBean deleteReferral(String referralUserName) {
-        boolean exists = referralDao.existsById(referralUserName);
+    public ReferralBean deleteReferral(String email) {
+        boolean exists = referralDao.existsByEmail(email);
         if(!exists){
-            throw new IllegalStateException("employee with Id "+referralUserName+" does not exists");
+            throw new IllegalStateException("employee with Id "+email+" does not exists");
         }
-        referralDao.deleteById(referralUserName);
+        referralDao.deleteByEmail(email);
         System.out.println("Deleted Successfully");
         return null;
     }
 
+
+    // complete
     @Override
-    public ReferralBean searchReferralById(String referralUserName) {
-        Optional<ReferralEntity> referralEntity = referralDao.findById(referralUserName);
-        if(referralEntity.isPresent()){
+    public List<ReferralBean> searchReferralByFirstName(String referralFirstName, String username) {
+        List<ReferralEntity> referralEntities= referralDao.findAllByReferralFirstNameAndUsername(referralFirstName,username);
+        List<ReferralBean> referralBeans = new ArrayList<>();
 
-            ReferralEntity entity = referralEntity.get();
-            ReferralBean referralBean;
+        if(referralEntities.size()>0){
 
-            referralBean = convertToBean(entity);
+             for(ReferralEntity entity : referralEntities){
+                 ReferralBean referralBean;
+                 referralBean = convertToBean(entity);
+                 referralBeans.add(referralBean);
+             }
 
-            return referralBean;
+             return referralBeans;
 
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record Not Found");
         }
     }
 
+    @Override
+    public List<ReferralBean> findAllByUserName(String username) {
+
+        List<ReferralEntity> referralEntities= referralDao.findAllByUsername(username);
+        List<ReferralBean> referralBeans = new ArrayList<>();
+
+        if(referralEntities.size()>0){
+
+            for(ReferralEntity entity : referralEntities){
+                ReferralBean referralBean;
+                referralBean = convertToBean(entity);
+                referralBeans.add(referralBean);
+            }
+
+            return referralBeans;
+
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record Not Found");
+        }
+
+    }
+
+    // complete
     public ReferralBean updateReferral(ReferralBean referralBean) {
         ReferralEntity entity = convertToEntity(referralBean);
         boolean exists = referralDao.existsById(entity.getUsername());
@@ -87,40 +120,30 @@ public class ReferralServiceImpl implements ReferralService{
         else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record with this Id not present");
         }
-        ReferralBean newReferralBean = convertToBean(entity);
-        return newReferralBean;
+      return convertToBean(entity);
+
     }
 
+    // complete
     @Override
-    public ReferralEntity searchReferralByEmail(String email) {
+    public ReferralBean searchReferralByEmail(String email) {
         Optional<ReferralEntity> referralEntity = Optional.ofNullable(referralDao.findByEmail(email));
         if(referralEntity.isPresent()){
-            return referralEntity.get();
+            return convertToBean(referralEntity.get());
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record Not Found");
         }
     }
 
     @Override
-    public ReferralEntity searchReferralByMobile(String mobileNumber) {
+    public ReferralBean searchReferralByMobile(String mobileNumber) {
         Optional<ReferralEntity> referralEntity = Optional.ofNullable(referralDao.findByMobileNumber(mobileNumber));
         if(referralEntity.isPresent()){
-            return referralEntity.get();
+            return convertToBean(referralEntity.get());
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record Not Found");
         }
     }
-
-
-    @Override
-    public ReferralEntity searchReferralByFirstName(String referralFirstName) {
-        Optional<ReferralEntity> referralEntity = Optional.ofNullable(referralDao.findByReferralFirstName(referralFirstName));
-        if(referralEntity.isPresent()){
-            return referralEntity.get();
-        }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record Not Found");
-        }
- }
 
     @Override
     public Long generateReferralCode() {

@@ -4,12 +4,20 @@ import com.dphone.referral.entity.ReferralEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ReferralDao extends JpaRepository<ReferralEntity, String > {
-    public ReferralEntity findByEmail(String email);
+     ReferralEntity findByEmail(String email);
 
-    public ReferralEntity findByMobileNumber(String mobileNumber);
+     ReferralEntity findByMobileNumber(String mobileNumber);
 
-    public ReferralEntity findByReferralFirstName(String referralFirstName);
+     List<ReferralEntity> findAllByReferralFirstNameAndUsername(String referralFirstName,String username);
 
+     List<ReferralEntity> findAllByUsername(String username);
+     void deleteByEmail(String email);
+
+
+
+    public boolean existsByEmail(String email);
 }

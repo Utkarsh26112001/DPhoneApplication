@@ -2,8 +2,8 @@ package com.dphone.referral.controller;
 
 
 import com.dphone.referral.bean.ReferralBean;
-import com.dphone.referral.entity.ReferralEntity;
 import com.dphone.referral.service.ReferralServiceImpl;
+import com.dphone.referral.util.ReferralSearchByName;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -32,28 +32,29 @@ public class ReferralController {
 
     }
 
-    @GetMapping("/referrals/{username}")
-    public ResponseEntity<ReferralBean> searchById(@PathVariable("username")  String username){
-        ReferralBean referralBean =  referralService.searchReferralById(username);
+    @GetMapping("/getAllByUsername/{username}")
+    public List<ReferralBean> displayAllReferralOfUser(@PathVariable("username")String username){
+
+        return referralService.findAllByUserName(username);
+    }
+
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<ReferralBean> searchByEmail(@PathVariable("email") String email){
+        ReferralBean referralBean = (ReferralBean) referralService.searchReferralByEmail(email);
         return new ResponseEntity<>(referralBean, new HttpHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping("/email/{email}")
-    public ResponseEntity<ReferralEntity> searchByEmail(@PathVariable("email") String email){
-        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByEmail(email);
-        return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
-    }
-
-    @GetMapping("/name/{name}")
-    public ResponseEntity<ReferralEntity> searchByFname(@PathVariable("name") String firstname){
-        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByFirstName(firstname);
+    @GetMapping("/name/searchByName")
+    public ResponseEntity<List<ReferralBean>> searchByReferralFirstName(@RequestBody ReferralSearchByName obj){
+        List<ReferralBean> referralEntity =  referralService.searchReferralByFirstName(obj.getReferralFirstName(), obj.getUsername());
         return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
     }
 
     @GetMapping("/phone/{mobile}")
-    public ResponseEntity<ReferralEntity> searchByMobile(@PathVariable("mobile") String mobile){
-        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralByMobile(mobile);
-        return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
+    public ResponseEntity<ReferralBean> searchByMobile(@PathVariable("mobile") String mobile){
+        ReferralBean referralBean = (ReferralBean) referralService.searchReferralByMobile(mobile);
+        return new ResponseEntity<>(referralBean, new HttpHeaders(), HttpStatus.OK);
     }
 
     @PostMapping("/saveReferral")
@@ -62,9 +63,9 @@ public class ReferralController {
         return new ResponseEntity<>(referralBean1, new HttpHeaders(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteReferral/{username}")
-    public ResponseEntity<ReferralBean> deleteReferral(@PathVariable("username") String username){
-        ReferralBean referralBean = referralService.deleteReferral(username);
+    @DeleteMapping("/deleteReferral/{email}")
+    public ResponseEntity<ReferralBean> deleteReferral(@PathVariable("email") String email){
+            ReferralBean referralBean = referralService.deleteReferral(email);
         return new ResponseEntity<>(referralBean, new HttpHeaders(), HttpStatus.OK);
     }
     @PutMapping("/updateReferral")
