@@ -1,8 +1,8 @@
 package com.dphone.user.service;
 
 import com.dphone.user.bean.UserBean;
-import com.dphone.user.controller.AuthenticationRequest;
-import com.dphone.user.controller.AuthenticationResponse;
+import com.dphone.user.util.AuthenticationRequest;
+import com.dphone.user.util.AuthenticationResponse;
 //import com.dphone.user.controller.RegisterRequest;
 import com.dphone.user.dao.UserDao;
 import com.dphone.user.entity.Role;

@@ -1,4 +1,5 @@
-package com.dphone.user.controller;
+package com.dphone.user.util;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,11 +8,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationRequest {
+@NoArgsConstructor
+public class AuthenticationResponse {
 
-    private String username;
-     String password;
+    private String token;
 
 }

@@ -1,17 +1,13 @@
 package com.dphone.user.controller;
-
-
 import com.dphone.user.bean.ReferralBean;
 import com.dphone.user.fiegn.ReferralFigenInterface;
+import com.dphone.user.util.ReferralSearchByName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.Ref;
 import java.util.List;
 
 @RestController
-
 @RequestMapping("/api/v1/auth/user/ref")
 public class UserReferralController {
 
@@ -31,14 +27,39 @@ public class UserReferralController {
 
         ResponseEntity<ReferralBean> userReferral = referralFigenInterface.addReferral(referralBean);
 
+        // need to call email services
+
         return  "save";
     }
 
-    @GetMapping(value="/totalReferrals")
+    @GetMapping("/getAllByUsername/{username}")
+    public List<ReferralBean> displayAllReferralOfUser(@PathVariable("username")String username){
 
-    public List<ReferralBean> displayReferral(){
+        return referralFigenInterface.displayAllReferralOfUser(username);
+    }
 
-        return referralFigenInterface.diaplayAll();
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<ReferralBean> searchByEmail(@PathVariable("email") String email){
+
+        return referralFigenInterface.searchByEmail(email);
+    }
+
+    @GetMapping("/name/searchByName")
+    public ResponseEntity<List<ReferralBean>> searchByReferralFirstName(@RequestBody ReferralSearchByName obj){
+        return referralFigenInterface.searchByReferralFirstName(obj);
+    }
+
+    @GetMapping("/phone/{mobile}")
+    public ResponseEntity<ReferralBean> searchByMobile(@PathVariable("mobile") String mobile){
+
+        return referralFigenInterface.searchByMobile(mobile);
+    }
+
+
+    @PutMapping("/updateReferral")
+    public ResponseEntity<ReferralBean> updateReferral(@RequestBody ReferralBean referralBean){
+        return referralFigenInterface.updateReferral(referralBean);
     }
 
 }
