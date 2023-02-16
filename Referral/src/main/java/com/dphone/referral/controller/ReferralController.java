@@ -25,6 +25,7 @@ public class ReferralController {
         return "hello";
     }
 
+    @CrossOrigin
     @GetMapping("/getAllReferral")
     public List<ReferralBean> diaplayAll(){
         return referralService.getAllReferral();
