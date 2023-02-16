@@ -6,10 +6,10 @@ import com.dphone.referral.entity.ReferralEntity;
 import java.util.List;
 
 public interface ReferralService {
-    List<ReferralEntity> getAllReferral();
+    List<ReferralBean> getAllReferral();
     ReferralBean saveReferral(ReferralBean referralBean);
     ReferralBean deleteReferral(String referralUserName);
-    ReferralEntity searchReferralById(String referralUserName);
+    ReferralBean searchReferralById(String referralUserName);
     ReferralBean updateReferral(ReferralBean referralBean);
     ReferralEntity searchReferralByEmail(String email);
     ReferralEntity searchReferralByMobile(String referralMobileNumber);

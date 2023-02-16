@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -21,8 +22,17 @@ public class ReferralServiceImpl implements ReferralService{
     private final ReferralDao referralDao;
 
     @Override
-    public List<ReferralEntity> getAllReferral() {
-        return referralDao.findAll();
+    public List<ReferralBean> getAllReferral() {
+
+         List<ReferralEntity> list = referralDao.findAll();
+         List<ReferralBean>  beanList = new ArrayList<>();
+
+         for(ReferralEntity referralEntity : list){
+             ReferralBean referralBean = convertToBean(referralEntity);
+
+             beanList.add(referralBean);
+         }
+          return beanList;
     }
     @Override
     public ReferralBean saveReferral(ReferralBean referralBean) {
@@ -52,10 +62,17 @@ public class ReferralServiceImpl implements ReferralService{
     }
 
     @Override
-    public ReferralEntity searchReferralById(String referralUserName) {
+    public ReferralBean searchReferralById(String referralUserName) {
         Optional<ReferralEntity> referralEntity = referralDao.findById(referralUserName);
         if(referralEntity.isPresent()){
-            return referralEntity.get();
+
+            ReferralEntity entity = referralEntity.get();
+            ReferralBean referralBean;
+
+            referralBean = convertToBean(entity);
+
+            return referralBean;
+
         }else{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Record Not Found");
         }
