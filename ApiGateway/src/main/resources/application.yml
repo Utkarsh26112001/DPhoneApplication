@@ -25,5 +25,9 @@ spring:
         uri: lb://mailservice
         predicates:
           - Path=/dphonemailservice/**
+      - id: product
+        uri: lb://ProductsDetailsApplication
+        predicates:
+          - Path=/api/product/**
   main:
     web-application-type: reactive
