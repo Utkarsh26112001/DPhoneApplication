@@ -26,15 +26,15 @@ public class ReferralController {
     }
 
     @GetMapping("/getAllReferral")
-    public List<ReferralEntity> diaplayAll(){
+    public List<ReferralBean> diaplayAll(){
         return referralService.getAllReferral();
 
     }
 
     @GetMapping("/referrals/{username}")
-    public ResponseEntity<ReferralEntity> searchById(@PathVariable("username")  String username){
-        ReferralEntity referralEntity = (ReferralEntity) referralService.searchReferralById(username);
-        return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
+    public ResponseEntity<ReferralBean> searchById(@PathVariable("username")  String username){
+        ReferralBean referralBean =  referralService.searchReferralById(username);
+        return new ResponseEntity<>(referralBean, new HttpHeaders(), HttpStatus.OK);
     }
 
     @GetMapping("/email/{email}")
