@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @FeignClient(value="ReferralApplication",url = "http://localhost:9191/api/v1/referral")
-public
-interface ReferralFigenInterface {
+public interface ReferralFigenInterface {
 
     @GetMapping(value="/home")
     public String test();
@@ -37,5 +36,8 @@ interface ReferralFigenInterface {
 
     @PutMapping("/updateReferral")
     public ResponseEntity<ReferralBean> updateReferral(@RequestBody ReferralBean referralBean);
+
+    @GetMapping("/searchBy/{referralCode}")
+    public ResponseEntity<ReferralBean> findByReferralCode(@PathVariable("referralCode") String referralCode);
 
 }

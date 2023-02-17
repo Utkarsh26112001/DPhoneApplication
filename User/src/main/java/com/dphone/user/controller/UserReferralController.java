@@ -5,6 +5,8 @@ import com.dphone.user.util.ReferralSearchByName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @RestController
@@ -60,6 +62,19 @@ public class UserReferralController {
     @PutMapping("/updateReferral")
     public ResponseEntity<ReferralBean> updateReferral(@RequestBody ReferralBean referralBean){
         return referralFigenInterface.updateReferral(referralBean);
+    }
+
+
+    @GetMapping("/searchBy/{referralCode}")
+    public ResponseEntity<ReferralBean> findByReferralCode(@PathVariable("referralCode") String referralCode){
+
+        ResponseEntity<ReferralBean> reponseEntity = referralFigenInterface.findByReferralCode(referralCode);
+
+        reponseEntity.getBody();
+
+
+
+        return reponseEntity;
     }
 
 }
