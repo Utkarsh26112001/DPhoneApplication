@@ -35,13 +35,16 @@ public class ProductServiceImpl implements ProductService{
     public ProductBean saveProduct(ProductBean productBean) {
         ProductEntity entity =  convertToEntity(productBean);
         // from object to object copying
-        boolean exists = productDao.existsById(entity.getProductId());
+        String code = "";
+        if(entity.getReferralCode()!=null)
+         code   = entity.getReferralCode();
+        boolean exists = productDao.existsByReferralCode(code);
         if(!exists){
 
             productDao.save(entity);
         }
         else {
-            throw new IllegalStateException("product with Id "+entity.getProductId()+" already exists");
+            throw new IllegalStateException("product with referral code "+entity.getReferralCode()+" already exists");
         }
         ProductBean newReferralBean = convertToBean(entity);
         return newReferralBean;
