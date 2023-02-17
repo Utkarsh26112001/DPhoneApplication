@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "Products")
 public class ProductEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long productId;
     private String referralCode;
     private String productName;
