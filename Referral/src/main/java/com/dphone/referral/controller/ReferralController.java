@@ -15,7 +15,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/referral")
+    @RequestMapping("/api/v1/referral")
 public class ReferralController {
 
     @Autowired
@@ -72,5 +72,17 @@ public class ReferralController {
     public ResponseEntity<ReferralBean> updateReferral(@RequestBody ReferralBean referralBean){
         ReferralBean referralBean1 = referralService.updateReferral(referralBean);
         return new ResponseEntity<>(referralBean1, new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @GetMapping("/searchBy/{referralCode}")
+    public ReferralBean findByReferralCode(@PathVariable("referralCode") String referralCode){
+        ReferralBean referralBean = referralService.findByReferralCode(referralCode);
+        return referralBean;
+    }
+
+    @GetMapping("/updateRefByEmail/{points}/{email}")
+    public ReferralBean updateReferralByEmail(@PathVariable ("points") int points , @PathVariable ("email") String email){
+        ReferralBean referralBean = referralService.updateReferralByEmail(points,email);
+        return referralBean;
     }
 }
