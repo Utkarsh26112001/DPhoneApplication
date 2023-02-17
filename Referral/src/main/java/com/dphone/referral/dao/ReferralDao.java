@@ -16,7 +16,7 @@ public interface ReferralDao extends JpaRepository<ReferralEntity, String > {
 
      List<ReferralEntity> findAllByUsername(String username);
      void deleteByEmail(String email);
-
+     ReferralEntity findByReferralCode(String  referralCode);
 
 
     public boolean existsByEmail(String email);
