@@ -1,22 +1,28 @@
-package com.dphone.customer.bean;
+package com.dphone.customer.entity;
 
-//import lombok.*;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class CustomerBean {
-    private Long customerId;
+@Entity
+@Table(name="Customer")
+public class CustomerEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Long customerId;
     private String username;
     private String customerFirstName;
     private String customerLastName;
+    @Column(length = 10)
     private String customerMobileNumber;
+    @Column(unique = true)
     private String customerEmail;
     private String customerAddress;
+
 
 }
