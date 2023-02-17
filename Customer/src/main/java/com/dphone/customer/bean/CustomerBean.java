@@ -1,19 +1,22 @@
 package com.dphone.customer.bean;
 
-import lombok.*;
+//import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class CustomerBean {
-    private long customerId;
+    private Long customerId;
+    private String username;
     private String customerFirstName;
     private String customerLastName;
     private String customerMobileNumber;
     private String customerEmail;
-    private String customerLoginId;
-    private String customerPassword;
+    private String customerAddress;
 
 }
