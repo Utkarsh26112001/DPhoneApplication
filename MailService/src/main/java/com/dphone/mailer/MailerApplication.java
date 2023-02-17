@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MailerApplication {
     public static void main(String[] args) {
         SpringApplication.run(MailerApplication.class,args);
+
+
         System.out.println("Hello world!");
     }
 }
