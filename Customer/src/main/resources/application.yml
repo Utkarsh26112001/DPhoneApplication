@@ -2,9 +2,11 @@ spring:
   application:
     name: CustomerApplication
   datasource:
-    url: jdbc:postgresql://localhost:5432/dphone_products
+    url: jdbc:postgresql://localhost:5432/dphone_customer
     username: postgres
     password: Finserv@2023
+  main:
+    allow-circular-references: true
   jpa:
     hibernate:
       ddl-auto: update
