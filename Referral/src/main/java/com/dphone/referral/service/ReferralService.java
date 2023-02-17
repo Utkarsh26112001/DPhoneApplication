@@ -13,7 +13,7 @@ public interface ReferralService {
     ReferralBean searchReferralByEmail(String email);
     ReferralBean searchReferralByMobile(String referralMobileNumber);
     List<ReferralBean> searchReferralByFirstName(String referralFirstName,String userName);
-
+    ReferralBean findByReferralCode(String referralCode);
     List<ReferralBean> findAllByUserName(String username);
     Long generateReferralCode();
 }

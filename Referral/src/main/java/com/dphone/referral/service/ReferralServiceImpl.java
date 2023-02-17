@@ -124,6 +124,17 @@ public class ReferralServiceImpl implements ReferralService{
 
     }
 
+    public ReferralBean updateReferralByEmail(int points , String email){
+
+        ReferralEntity referralEntity = referralDao.findByEmail(email);
+
+        referralEntity.setPoints(referralEntity.getPoints()+points);
+
+        referralDao.save(referralEntity);
+
+        return convertToBean(referralEntity);
+    }
+
     // complete
     @Override
     public ReferralBean searchReferralByEmail(String email) {
@@ -145,6 +156,11 @@ public class ReferralServiceImpl implements ReferralService{
         }
     }
 
+    @Override
+    public ReferralBean findByReferralCode(String referralCode){
+        ReferralEntity referralEntity = referralDao.findByReferralCode(referralCode);
+        return convertToBean(referralEntity);
+    }
     @Override
     public Long generateReferralCode() {
         Random rand = new Random();
