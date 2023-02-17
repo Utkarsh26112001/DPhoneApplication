@@ -1,4 +1,4 @@
-package com.dphone.products.bean;
+package com.dphone.user.bean;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
