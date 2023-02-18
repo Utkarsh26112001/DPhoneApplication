@@ -15,13 +15,14 @@ public class AuthenticationController {
 
 	private final AuthenticationService service;
 
+	@CrossOrigin
 	@GetMapping("/home")
 	
 	public String test() {
 		
 		return "hello";
 	}
-
+	@CrossOrigin
 	@PostMapping("/register")
 
 
@@ -30,6 +31,7 @@ public class AuthenticationController {
       return ResponseEntity.ok(service.register(request));
 	}
 
+	@CrossOrigin
 	@PostMapping("/authenticate")
 
 	public ResponseEntity<AuthenticationResponse> authenticateRequest(@RequestBody AuthenticationRequest request){

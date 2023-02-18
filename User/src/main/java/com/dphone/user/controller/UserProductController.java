@@ -19,10 +19,13 @@ public class UserProductController {
     ProductFigenInterface productFigenInterface;
     ReferralFigenInterface referralFigenInterface;
 
+    @CrossOrigin
     @GetMapping("/home")
     public String test(){
         return "hello";
     }
+
+    @CrossOrigin
     @PostMapping("/buyProduct")
     public String addProduct(@RequestBody ProductBean productBean){
 
