@@ -21,7 +21,8 @@ public class EmailController {
 
     @PostMapping("/sendMail")
 
-    public String sendMail (@RequestBody EmailDetails details){
+    public String sendMail (@RequestBody  EmailDetails details){
+        EmailDetails obj = details;
         String status
                 = emailService.sendSimpleMail(details);
 
@@ -34,7 +35,6 @@ public class EmailController {
             @RequestBody EmailDetails details) throws MessagingException {
         String status
                 = emailService.sendMailWithAttachment(details);
-
         return status;
     }
 

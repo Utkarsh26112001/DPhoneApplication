@@ -47,7 +47,7 @@ public class ReferralServiceImpl implements ReferralService{
             referralDao.save(entity);
         }
         else {
-            throw new IllegalStateException("referral with Id "+entity.getUsername()+" already exists");
+            throw new IllegalStateException("referral with email"+entity.getEmail()+" already exists");
         }
       return  convertToBean(entity);
 

@@ -30,6 +30,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public String sendSimpleMail(EmailDetails details) {
 
+        EmailDetails obj = details;
         System.out.println(sender);
 
         try

@@ -1,18 +1,23 @@
 package com.dphone.user.controller;
 import com.dphone.user.bean.ReferralBean;
 import com.dphone.user.fiegn.ReferralFigenInterface;
+import com.dphone.user.util.EmailDetails;
 import com.dphone.user.util.ReferralSearchByName;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import javax.swing.text.html.parser.Entity;
+import java.io.DataInput;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/auth/user/ref")
 public class UserReferralController {
 
+    String uri = "http://localhost:9191/dphonemailservice/";
     @Autowired
     ReferralFigenInterface referralFigenInterface;
     @CrossOrigin
@@ -32,6 +37,21 @@ public class UserReferralController {
         ResponseEntity<ReferralBean> userReferral = referralFigenInterface.addReferral(referralBean);
 
         // need to call email services
+
+        String msgbody = "Hey" + referralBean.getReferralFirstName() + " you have been referred by " +
+                referralBean.getUsername() + " your referral code is " +  userReferral.getBody().getReferralCode();
+
+        EmailDetails emailDetails = new EmailDetails(referralBean.getEmail(),msgbody,"Dphone Referral"
+        );
+
+        RestTemplate restTemplate = new RestTemplate();
+
+
+        HttpHeaders headers = new HttpHeaders();
+//        headers.setAccept(MediaType.APPLICATION_JSON));
+        HttpEntity<EmailDetails> entity = new HttpEntity<EmailDetails>(emailDetails,headers);
+
+        restTemplate.postForEntity(uri + "sendMail", entity, String.class);
 
         return  "save";
     }
