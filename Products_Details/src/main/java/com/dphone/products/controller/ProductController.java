@@ -16,16 +16,19 @@ public class ProductController {
     @Autowired
     private ProductServiceImpl productService;
 
+    @CrossOrigin
     @GetMapping("/home")
     public String test(){
         return "hello";
     }
 
+    @CrossOrigin
     @GetMapping("/getAllProducts")
     public List<ProductBean> diaplayAll(){
         return productService.getAllProduct();
     }
 
+    @CrossOrigin
     @PostMapping("/saveProduct")
     public ResponseEntity<ProductBean> addProduct(@RequestBody ProductBean productBean){
         ProductBean productBean1 = productService.saveProduct(productBean);
