@@ -18,16 +18,18 @@ public class CustomerController {
     @Autowired
     private CustomerServiceImpl customerService;
 
+    @CrossOrigin
     @GetMapping("/home")
     public String test(){
         return "working";
     }
-
+    @CrossOrigin
     @GetMapping("/getAllCustomer")
     public List<CustomerBean> displayAll(){
         return customerService.getAllReferral();
     }
 
+    @CrossOrigin
     @PostMapping("/saveCustomer")
     public ResponseEntity<CustomerBean> addReferral(@RequestBody CustomerBean customerBean){
         CustomerBean customerBean1 = customerService.saveReferral(customerBean);
