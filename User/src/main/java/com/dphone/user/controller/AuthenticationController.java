@@ -11,30 +11,24 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth/user/")
+@CrossOrigin("http://localhost:63342")
 public class AuthenticationController {
 
 	private final AuthenticationService service;
 
-	@CrossOrigin
 	@GetMapping("/home")
-	
 	public String test() {
 		
 		return "hello";
 	}
-	@CrossOrigin
 	@PostMapping("/register")
-
-
-	public ResponseEntity<AuthenticationResponse> register(@RequestBody UserBean request){
+	public ResponseEntity<AuthenticationResponse> register( UserBean request){
 
       return ResponseEntity.ok(service.register(request));
 	}
 
-	@CrossOrigin
 	@PostMapping("/authenticate")
-
-	public ResponseEntity<AuthenticationResponse> authenticateRequest(@RequestBody AuthenticationRequest request){
+	public ResponseEntity<AuthenticationResponse> authenticateRequest( AuthenticationRequest request){
 
 		return ResponseEntity.ok(service.authenticate(request));
 
