@@ -15,11 +15,13 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-    @RequestMapping("/api/v1/referral")
+@RequestMapping("/api/v1/referral")
 public class ReferralController {
 
     @Autowired
     private ReferralServiceImpl referralService;
+
+    @CrossOrigin
     @GetMapping("/home")
     public String test(){
         return "hello";
@@ -32,54 +34,62 @@ public class ReferralController {
 
     }
 
+    @CrossOrigin
     @GetMapping("/getAllByUsername/{username}")
     public List<ReferralBean> displayAllReferralOfUser(@PathVariable("username")String username){
 
         return referralService.findAllByUserName(username);
     }
 
-
+    @CrossOrigin
     @GetMapping("/email/{email}")
     public ResponseEntity<ReferralBean> searchByEmail(@PathVariable("email") String email){
         ReferralBean referralBean = (ReferralBean) referralService.searchReferralByEmail(email);
         return new ResponseEntity<>(referralBean, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("/name/searchByName")
     public ResponseEntity<List<ReferralBean>> searchByReferralFirstName(@RequestBody ReferralSearchByName obj){
         List<ReferralBean> referralEntity =  referralService.searchReferralByFirstName(obj.getReferralFirstName(), obj.getUsername());
         return new ResponseEntity<>(referralEntity, new HttpHeaders(), HttpStatus.OK);
     }
-
+    @CrossOrigin
     @GetMapping("/phone/{mobile}")
     public ResponseEntity<ReferralBean> searchByMobile(@PathVariable("mobile") String mobile){
         ReferralBean referralBean = (ReferralBean) referralService.searchReferralByMobile(mobile);
         return new ResponseEntity<>(referralBean, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @PostMapping("/saveReferral")
     public ResponseEntity<ReferralBean> addReferral(@RequestBody ReferralBean referralBean){
         ReferralBean referralBean1 = referralService.saveReferral(referralBean);
         return new ResponseEntity<>(referralBean1, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @DeleteMapping("/deleteReferral/{email}")
     public ResponseEntity<ReferralBean> deleteReferral(@PathVariable("email") String email){
             ReferralBean referralBean = referralService.deleteReferral(email);
         return new ResponseEntity<>(referralBean, new HttpHeaders(), HttpStatus.OK);
     }
+
+    @CrossOrigin
     @PutMapping("/updateReferral")
     public ResponseEntity<ReferralBean> updateReferral(@RequestBody ReferralBean referralBean){
         ReferralBean referralBean1 = referralService.updateReferral(referralBean);
         return new ResponseEntity<>(referralBean1, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("/searchBy/{referralCode}")
     public ReferralBean findByReferralCode(@PathVariable("referralCode") String referralCode){
         ReferralBean referralBean = referralService.findByReferralCode(referralCode);
         return referralBean;
     }
 
+    @CrossOrigin
     @GetMapping("/updateRefByEmail/{points}/{email}")
     public ReferralBean updateReferralByEmail(@PathVariable ("points") int points , @PathVariable ("email") String email){
         ReferralBean referralBean = referralService.updateReferralByEmail(points,email);
