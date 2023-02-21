@@ -17,6 +17,7 @@ import java.util.Date;
 @Component
 public class ProductBean {
     private String productName;
+
     private Long productId;
     private Long price;
     private String referralCode;
